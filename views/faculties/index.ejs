@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Faculties</title>
+</head>
+<body>
+    <h1>Faculties</h1>
+
+    <a href="/faculties/new">Create new faculty</a>
+
+    <% if (faculties.length === 0) { %>
+        <p>No faculties found.</p>
+    <% } else { %>
+        <table border="1" cellpadding="6">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>University</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% faculties.forEach(f => { %>
+                    <tr>
+                        <td><%= f.name %></td>
+                        <td><%= f.address %></td>
+                        <td><%= f.university ? f.university.name : "N/A" %></td>
+                        <td>
+                            <a href="/faculties/<%= f._id %>/edit">Edit</a>
+
+                            <form action="/faculties/<%= f._id %>/delete" method="POST" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>
